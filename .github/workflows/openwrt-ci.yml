@@ -27,10 +27,6 @@ jobs:
 
     steps:
     
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v1
-
-
       - name: Checkout
         uses: actions/checkout@v2
         with:
@@ -49,6 +45,9 @@ jobs:
           sudo -E apt-get clean
 
           df -h
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v1
 
       - name: Update feeds
         run: |
