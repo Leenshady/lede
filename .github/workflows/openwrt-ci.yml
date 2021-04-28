@@ -15,9 +15,6 @@ on:
   release:
     types: [published]
 
-env:
-  SSH_ACTIONS: true
-
 jobs:
 
   build_openwrt:
@@ -32,7 +29,6 @@ jobs:
     
       - name: SSH connection to Actions
         uses: actions/checkout@v2
-        if: env.SSH_ACTIONS == 'true'
 
       - name: Checkout
         uses: actions/checkout@v2
