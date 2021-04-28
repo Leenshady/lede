@@ -46,9 +46,6 @@ jobs:
 
           df -h
 
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v1
-
       - name: Update feeds
         run: |
           sed -i 's/#src-git helloworld/src-git helloworld/g' ./feeds.conf.default
@@ -57,6 +54,9 @@ jobs:
 
       - name: Generate configuration file
         run: make defconfig
+
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v1
 
       - name: Make download
         run: |
