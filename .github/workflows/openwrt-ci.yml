@@ -27,8 +27,9 @@ jobs:
 
     steps:
     
-      - name: SSH connection to Actions
-        uses: actions/checkout@v2
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v1
+
 
       - name: Checkout
         uses: actions/checkout@v2
