@@ -360,7 +360,7 @@ define Device/glinet_gl-mt1300
   IMAGE_SIZE := 32448k
   DEVICE_VENDOR := GL.iNet
   DEVICE_MODEL := GL-MT1300
-  DEVICE_PACKAGES := kmod-mt7615e kmod-mt7615-firmware kmod-usb3
+  DEVICE_PACKAGES := kmod-usb3  kmod-mt7615d_dbdc
 endef
 TARGET_DEVICES += glinet_gl-mt1300
 
@@ -829,6 +829,16 @@ define Device/phicomm_k2p
 endef
 TARGET_DEVICES += phicomm_k2p
 
+define Device/phicomm_k2p-32m
+  IMAGE_SIZE := 32128k
+  DEVICE_VENDOR := Phicomm
+  DEVICE_MODEL := K2P
+  DEVICE_VARIANT := 32M
+  SUPPORTED_DEVICES += k2p-32M
+  DEVICE_PACKAGES := kmod-mt7615d_dbdc
+endef
+TARGET_DEVICES += phicomm_k2p-32m
+
 define Device/planex_vr500
   $(Device/uimage-lzma-loader)
   IMAGE_SIZE := 65216k
@@ -1082,6 +1092,33 @@ define Device/xiaomi_mi-router-ac2100
   DEVICE_MODEL := Mi Router AC2100
 endef
 TARGET_DEVICES += xiaomi_mi-router-ac2100
+
+define Device/xiaomi_mi-router-cr6606
+  $(Device/dsa-migration)
+  $(Device/uimage-lzma-loader)
+  DEVICE_VENDOR := Xiaomi
+  DEVICE_MODEL := Mi Router CR6606
+  DEVICE_ALT0_VENDOR := Xiaomi
+  DEVICE_ALT0_MODEL := Mi Router CR6606
+  DEVICE_ALT0_VARIANT := China Unicom
+  DEVICE_ALT1_VENDOR := Xiaomi
+  DEVICE_ALT1_MODEL := Mi Router CR6608
+  DEVICE_ALT1_VARIANT := China Mobile
+  DEVICE_ALT2_VENDOR := Xiaomi
+  DEVICE_ALT2_MODEL := Mi Router CR6609
+  DEVICE_ALT2_VARIANT := China Telecom
+  BLOCKSIZE := 128k
+  PAGESIZE := 2048
+  UBINIZE_OPTS := -E 5
+  IMAGE_SIZE := 51200k
+  IMAGES += firmware.bin overlay.bin
+  IMAGE/firmware.bin := append-kernel | pad-to 128k | append-rootfs | \
+  pad-rootfs
+  IMAGE/overlay.bin := append-ubi | check-size
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+  DEVICE_PACKAGES += uboot-envtools kmod-mt7915e
+endef
+TARGET_DEVICES += xiaomi_mi-router-cr6606
 
 define Device/xiaomi_redmi-router-ac2100
   $(Device/xiaomi-ac2100)
