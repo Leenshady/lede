@@ -26,6 +26,10 @@ jobs:
     if: github.event.repository.owner.id == github.event.sender.id
 
     steps:
+    
+      - name: SSH connection to Actions
+        uses: actions/checkout@v2
+        if: env.SSH_ACTIONS == 'true'
 
       - name: Checkout
         uses: actions/checkout@v2
