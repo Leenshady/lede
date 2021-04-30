@@ -53,8 +53,8 @@ jobs:
           ./scripts/feeds install -a
 
       #SSH
-      #- name: Setup tmate session
-      #  uses: mxschmitt/action-tmate@v1
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v1
       
       #默认配置
       #- name: Generate configuration file
